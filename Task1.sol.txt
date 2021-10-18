@@ -1,0 +1,7 @@
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/BaseOperations.sol";
+
+contract derive is BaseOperation {
+    // here we can use the functions of openzeppelin functions
+}

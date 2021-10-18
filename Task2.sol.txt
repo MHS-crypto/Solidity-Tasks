@@ -1,0 +1,64 @@
+pragma solidity ^0.8.0;
+
+contract taks {
+    
+    address owner;
+    mapping(bytes32 => address) token;
+    
+    
+    
+    constructor() public {
+        owner = msg.sender;
+    }
+    
+    modifier onlyOwner() {
+    require(msg.sender == owner);
+    _;
+    }
+    
+    function add(uint256 x, uint256 y) public view onlyOwner returns (uint256)
+        {
+            return x + y;
+        }
+        
+    function multiply(uint256 x, uint256 y) public view onlyOwner returns (uint256) {
+        /* 0 multiplied with anything gives 0 */
+        if(y == 0)
+            {
+            return 0;
+            }
+            
+    /* Add x one by one */
+        if(y > 0 )
+            {
+            return (x + multiply(x, y-1));
+            }
+            
+    }
+    
+    
+    
+    function div(uint x, uint y) public view onlyOwner returns (uint quotient, uint reminder)
+    
+        {
+            quotient  = x / y;
+            reminder = x - y * quotient;
+            
+        }
+        
+        
+    function percentOf(uint x, uint y)public view onlyOwner returns (uint percentage) {
+        percentage = x  * 100 / y;
+      
+    }
+    
+    function addAddresses(bytes32 name, address tokenAddress) public {
+        token[name] = tokenAddress;
+    }
+    
+   function getAddress(bytes32 name) public view returns(address) {
+       return token[name];
+   }
+    
+
+}
